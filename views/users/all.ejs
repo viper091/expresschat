@@ -1,0 +1,37 @@
+<DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+
+    <% if (users.length) { %>
+    <ul>
+      <% users.forEach( function(user) { %>
+        <li>
+          Nome <b>
+            <%= user.name %>
+            
+          </b>
+          Idade <b>
+            <%= user.age %>
+
+          </b>
+
+          <a href='users/remove/<%= user._id%>'>X</a>
+        </li>
+        
+        
+        <% }); %>
+    </ul>
+
+    <% } else { %>
+        Sem usuarios para mostrar <br>
+        <% } %>
+        
+        <a href='users/add'>Adicionar novo usuario</a>
+  </body>
+</html>

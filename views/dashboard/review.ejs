@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dashboard </title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <% if( user ) { %>
+        Bem vindo <%= user.username %>
+    <%  } %>
+
+    <a href='/logout'>Logout</a>
+  </body>
+</html>
