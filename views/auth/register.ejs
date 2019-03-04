@@ -1,0 +1,30 @@
+<DOCTYPE html>
+    <html>
+      <head>
+        <title>User auth</title>
+        <link rel='stylesheet' href='/stylesheets/style.css' />
+      </head>
+      <body>
+        <h1>Register</h1>
+        <% if(message) { %>
+            <p>
+              <label style="color:Red"><%= message %></label>
+            </p>
+          <%}%>
+        <form action="/login/create" method="POST" >
+
+            <label for="username" >Nome</label>
+            <input type="text" name="username">
+
+            <label for="email" >Email</label>
+            <input type="text" name="email">
+
+            <label for="password" >password</label>
+            <input type="password" name="password">
+
+            <button type="submit">OK</button>
+        </form>
+      
+      </body>
+    </html>
+    

@@ -8,5 +8,9 @@ router.get('/dashboard', authmiddle(), function (
         user: req.user
     })
 })
+router.get('/messenger', function ( req, res, next){
 
+    return res.render('messenger', {'cUser' : req.user.username } );
+  });
+  
 module.exports = router;

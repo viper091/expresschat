@@ -1,16 +1,62 @@
 <DOCTYPE html>
-        <html>
-          <head>
-            <title>Messenger </title>
-            <link rel='stylesheet' href='/stylesheets/style.css' />
-          </head>
-          <body>
+  <html>
 
-            <ul id="messages"></ul>
-            <form action="">
-              <input id="m" autocomplete="off" /><button>Send</button>
-            </form>
-          
-          </body>
-        </html>
-        
+  <head>
+    <title>Messenger </title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+
+  <body>
+    <script src="/scripts/socket.io.js"></script>
+    <script>
+var socket = io.connect('http://localhost:3000');
+    socket.on('toClient', function (msg) {
+      var chat = document.getElementById('chat');
+      msgform = '<p>' + msg + '</p>';
+      chat.innerHTML += msgform;
+    });
+
+    socket.on('redirect', function(url){
+      window.location.href = url;
+    })
+    socket.on('online', function(users){
+      var onlineul = document.getElementById('on');
+      var username = document.getElementById('user').innerText;
+
+      var usersLI = '';
+      users.forEach(user => {
+        if(username != user)
+        usersLI = usersLI.concat('<li>',user, "<a href='#' onclick=sendpv('", user ,"')>", "send pv",'</a>','</li>');
+      });
+      onlineul.innerHTML = usersLI;
+    });
+
+
+
+    var enviar = function() {
+      var msg = document.getElementById('msg');
+      socket.emit('toServer', msg.value);
+    };
+
+    function sendpv(username){
+      socket.emit('createprivate', username);
+
+    }
+    
+      </script>
+    <section>
+      Hello <b id='user'>
+        <%= cUser %></b>
+      <pre id="chat"></pre>
+      <input type="text" id="msg" placeholder="Digite sua mensagem">
+      <input type="button" onclick="enviar();" value="Enviar">
+    </section>
+    <div>
+      <ul id='on'>
+
+      </ul>
+    </div>
+
+  </body>
+
+  </html>

@@ -1,12 +1,12 @@
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
+const url = 'mongodb://localhost:27017/dbtest';
+// Database Name
+const dbName = 'dbtest';
+const client = new MongoClient(url);
 
 async function connect() {
   // Connection URL
-  const url = 'mongodb://localhost:27017/dbtest';
-  // Database Name
-  const dbName = 'dbtest';
-  const client = new MongoClient(url);
 
   try {
     // Use connect method to connect to the Server
@@ -22,4 +22,12 @@ async function connect() {
 
 }
 
-module.exports = connect;
+function getConn(){
+  return  {db : client.db(dbName),
+    client : client}
+}
+
+module.exports = {
+  connect,
+  getConn
+};
